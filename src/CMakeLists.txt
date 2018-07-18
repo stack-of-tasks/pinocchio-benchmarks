@@ -1,7 +1,10 @@
-LINK_DIRECTORIES(${RBDL_LIBRARY_DIRS})
-
+# RBDL
 ADD_EXECUTABLE(rbdl-bench rbdl-bench)
-TARGET_INCLUDE_DIRECTORIES(rbdl-bench PUBLIC ${RBDL_INCLUDE_DIRS})
-TARGET_LINK_LIBRARIES(rbdl-bench rbdl_urdfreader ${RBDL_LIBRARIES} ${EIGEN3_LIBRARIES})
-
+PKG_CONFIG_USE_DEPENDENCY(rbdl-bench rbdl)
+TARGET_LINK_LIBRARIES(rbdl-bench rbdl_urdfreader)
 INSTALL(TARGETS rbdl-bench RUNTIME DESTINATION bin)
+
+# Pinocchio
+ADD_EXECUTABLE(pinocchio-bench pinocchio-bench)
+PKG_CONFIG_USE_DEPENDENCY(pinocchio-bench pinocchio)
+INSTALL(TARGETS pinocchio-bench RUNTIME DESTINATION bin)

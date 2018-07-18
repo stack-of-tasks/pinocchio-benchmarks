@@ -32,8 +32,8 @@ git submodule update --init --recursive
 ```
 mkdir -p build/pinocchio
 pushd build/pinocchio
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX ../../libs/pinocchio
-make install
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_CXX_STANDARD=11 ../../libs/pinocchio
+make -j8 install
 popd
 ```
 
@@ -45,7 +45,7 @@ popd
 mkdir -p build/kdl
 pushd build/kdl
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX ../../libs/kdl/orocos_kdl
-make install
+make -j8 install
 popd
 ```
 
@@ -68,7 +68,7 @@ mv rbdl-rbdl-* libs/rbdl
 mkdir -p build/rbdl
 pushd build/rbdl
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DRBDL_BUILD_ADDON_URDFREADER=ON ../../libs/rbdl
-make install
+make -j8 install
 popd
 ```
 
@@ -80,7 +80,7 @@ popd
 mkdir -p build/benchmarks
 pushd build/benchmarks
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_PREFIX_PATH=$PREFIX ../..
-make install
+make -j8 install
 popd
 ```
 
@@ -89,4 +89,6 @@ popd
 ```
 ./prefix/bin/rbdl-bench models/simple_humanoid.urdf
 ./prefix/bin/rbdl-bench models/romeo/romeo_description/urdf/romeo.urdf
+./prefix/bin/pinocchio-bench models/simple_humanoid.urdf
+./prefix/bin/pinocchio-bench models/romeo/romeo_description/urdf/romeo.urdf
 ```

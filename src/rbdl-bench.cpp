@@ -4,11 +4,7 @@
 #include <rbdl/rbdl.h>
 #include <rbdl/addons/urdfreader/urdfreader.h>
 
-using namespace RigidBodyDynamics;
-using namespace RigidBodyDynamics::Addons;
-using namespace RigidBodyDynamics::Math;
-
-int main (int argc, char** argv)
+int main(int argc, char** argv)
 {
   if (argc != 2)
   {
@@ -23,21 +19,29 @@ int main (int argc, char** argv)
     return 2;
   }
 
-  Model* model = new Model();
+  RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
 
-  // Load an urdf file provided by the user, with a floating base
-  URDFReadFromFile(argv[1], model, true);
+  // Load an urdf file provided by the user
+  RigidBodyDynamics::Addons::URDFReadFromFile(argv[1], model, true);
+  std::cout << "RBDL Benchmark" << std::endl;
+  std::cout << "  model: " << argv[1] << std::endl;
+  std::cout << "  nq: " << model->q_size << std::endl;
+  std::cout << "  nv: " << model->qdot_size << std::endl;
 
-  VectorNd Q = VectorNd::Zero (model->dof_count);
-  VectorNd QDot = VectorNd::Zero (model->dof_count);
-  VectorNd Tau = VectorNd::Zero (model->dof_count);
-  VectorNd QDDot = VectorNd::Zero (model->dof_count);
+  RigidBodyDynamics::Math::VectorNd q =
+    RigidBodyDynamics::Math::VectorNd::Random(model->q_size);
+  RigidBodyDynamics::Math::VectorNd qdot =
+    RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
+  RigidBodyDynamics::Math::VectorNd tau =
+    RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
+  RigidBodyDynamics::Math::VectorNd qddot =
+    RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
 
-  ForwardDynamics (*model, Q, QDot, Tau, QDDot);
-  std::cout << "QDDot after ABA: " << QDDot.transpose() << std::endl;
+  RigidBodyDynamics::ForwardDynamics(*model, q, qdot, tau, qddot);
+  std::cout << "qddot after ABA: " << qddot.transpose() << std::endl;
 
-  InverseDynamics (*model, Q, QDot, QDDot, Tau);
-  std::cout << "Tau aftern RNEA: " << Tau.transpose() << std::endl;
+  RigidBodyDynamics::InverseDynamics(*model, q, qdot, qddot, tau);
+  std::cout << "tau aftern RNEA: " << tau.transpose() << std::endl;
 
   delete model;
   return 0;
