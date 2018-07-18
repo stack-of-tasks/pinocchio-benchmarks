@@ -1,0 +1,3 @@
+[submodule "libs/kdl"]
+	path = libs/kdl
+	url = https://github.com/orocos/orocos_kinematics_dynamics.git
