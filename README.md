@@ -12,8 +12,10 @@ You have to choose the `PREFIX` in which you want to install Pinocchio, RBDL & K
 
 ```
 export PREFIX=$PWD/prefix  # with bash / zsh
+export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
 # OR
 set -x PREFIX $PWD/prefix  # with fish
+set -x LD_LIBRARY_PATH $PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
 ## Pinocchio
@@ -80,4 +82,11 @@ pushd build/benchmarks
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_PREFIX_PATH=$PREFIX ../..
 make install
 popd
+```
+
+### Running
+
+```
+./prefix/bin/rbdl-bench models/simple_humanoid.urdf
+./prefix/bin/rbdl-bench models/romeo/romeo_description/urdf/romeo.urdf
 ```
