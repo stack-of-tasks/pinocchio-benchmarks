@@ -1,0 +1,19 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+
+SET (CXX_DISABLE_WERROR ON)
+
+INCLUDE(cmake/base.cmake)
+
+SET(PROJECT_NAME pinocchio-benchmarks)
+SET(PROJECT_DESCRIPTION "Benchmarks of the Pinocchio library, against RBDL & KDL")
+
+SET(PROJECT_URL https://github.com/stack-of-tasks/${PROJECT_NAME})
+
+SETUP_PROJECT()
+
+ADD_REQUIRED_DEPENDENCY("eigen3")
+ADD_REQUIRED_DEPENDENCY("pinocchio")
+ADD_REQUIRED_DEPENDENCY("rbdl")
+ADD_REQUIRED_DEPENDENCY("orocos-kdl")
+
+SETUP_PROJECT_FINALIZE()
