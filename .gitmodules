@@ -1,0 +1,6 @@
+[submodule "libs/kdl"]
+	path = libs/kdl
+	url = https://github.com/orocos/orocos_kinematics_dynamics.git
+[submodule "libs/pinocchio"]
+	path = libs/pinocchio
+	url = https://github.com/stack-of-tasks/pinocchio.git
