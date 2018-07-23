@@ -8,3 +8,9 @@ INSTALL(TARGETS rbdl-bench RUNTIME DESTINATION bin)
 ADD_EXECUTABLE(pinocchio-bench pinocchio-bench)
 PKG_CONFIG_USE_DEPENDENCY(pinocchio-bench pinocchio)
 INSTALL(TARGETS pinocchio-bench RUNTIME DESTINATION bin)
+
+# Pinocchio & benchmark
+ADD_EXECUTABLE(pinocchio-benchmark pinocchio-benchmark)
+PKG_CONFIG_USE_DEPENDENCY(pinocchio-bench pinocchio)
+PKG_CONFIG_USE_DEPENDENCY(pinocchio-bench benchmark)
+INSTALL(TARGETS pinocchio-benchmark RUNTIME DESTINATION bin)

@@ -32,7 +32,7 @@ git submodule update --init --recursive
 ```
 mkdir -p build/pinocchio
 pushd build/pinocchio
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_CXX_STANDARD=11 ../../libs/pinocchio
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_PYTHON_INTERFACE=OFF -DBUILD_UNIT_TESTS=OFF ../../libs/pinocchio
 make -j8 install
 popd
 ```
@@ -44,7 +44,7 @@ popd
 ```
 mkdir -p build/kdl
 pushd build/kdl
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX ../../libs/kdl/orocos_kdl
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib ../../libs/kdl/orocos_kdl
 make -j8 install
 popd
 ```
@@ -67,7 +67,19 @@ mv rbdl-rbdl-* libs/rbdl
 ```
 mkdir -p build/rbdl
 pushd build/rbdl
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DRBDL_BUILD_ADDON_URDFREADER=ON ../../libs/rbdl
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DRBDL_BUILD_ADDON_URDFREADER=ON ../../libs/rbdl
+make -j8 install
+popd
+```
+
+## Google Benchmark
+
+### Installing
+
+```
+mkdir -p build/google-benchmark
+pushd build/google-benchmark
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DBENCHMARK_ENABLE_GTEST_TESTS=OFF ../../benchmark
 make -j8 install
 popd
 ```
@@ -77,9 +89,9 @@ popd
 ### Installing
 
 ```
-mkdir -p build/benchmarks
-pushd build/benchmarks
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_PREFIX_PATH=$PREFIX ../..
+mkdir -p build/pinocchio-benchmarks
+pushd build/pinocchio-benchmarks
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$PREFIX ../..
 make -j8 install
 popd
 ```

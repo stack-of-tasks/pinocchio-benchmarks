@@ -4,3 +4,9 @@
 [submodule "libs/pinocchio"]
 	path = libs/pinocchio
 	url = https://github.com/stack-of-tasks/pinocchio.git
+[submodule "benchmark"]
+	path = benchmark
+	url = https://github.com/google/benchmark.git
+[submodule "googletest"]
+	path = googletest
+	url = https://github.com/google/googletest.git
