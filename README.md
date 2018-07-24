@@ -103,4 +103,8 @@ popd
 ./prefix/bin/rbdl-bench models/romeo/romeo_description/urdf/romeo.urdf
 ./prefix/bin/pinocchio-bench models/simple_humanoid.urdf
 ./prefix/bin/pinocchio-bench models/romeo/romeo_description/urdf/romeo.urdf
+sudo cpupower frequency-set --governor performance
+./prefix/bin/pinocchio-benchmark
+./prefix/bin/rbdl-benchmark
+sudo cpupower frequency-set --governor powersave
 ```
