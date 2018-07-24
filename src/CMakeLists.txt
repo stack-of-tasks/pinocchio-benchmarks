@@ -13,9 +13,9 @@ PKG_CONFIG_USE_DEPENDENCY(pinocchio-test pinocchio)
 INSTALL(TARGETS pinocchio-test RUNTIME DESTINATION bin)
 
 # KDL test
-ADD_EXECUTABLE(kdl-test kdl-test)
-PKG_CONFIG_USE_DEPENDENCY(kdl-test kdl_parser)
-INSTALL(TARGETS kdl-test RUNTIME DESTINATION bin)
+#ADD_EXECUTABLE(kdl-test kdl-test)
+#PKG_CONFIG_USE_DEPENDENCY(kdl-test kdl_parser)
+#INSTALL(TARGETS kdl-test RUNTIME DESTINATION bin)
 
 # RBDL benchmark
 ADD_EXECUTABLE(rbdl-benchmark rbdl-benchmark)

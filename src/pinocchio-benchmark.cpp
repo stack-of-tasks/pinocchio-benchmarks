@@ -37,9 +37,6 @@ static void BM_Pinocchio_RNEA(benchmark::State& state)
 
 static void BM_Pinocchio_ABA(benchmark::State& state)
 {
-  std::string model_file = pinocchio_benchmarks::path +
-    pinocchio_benchmarks::models[state.range(0)];
-
   se3::Model model;
   se3::urdf::buildModel(pinocchio_benchmarks::path +
       pinocchio_benchmarks::models[state.range(0)],

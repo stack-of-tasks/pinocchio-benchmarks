@@ -18,3 +18,9 @@
 	url = ../../poppy-project/poppy-humanoid.git
 	shallow = true
 	fetchRecurseSubmodules = false
+[submodule "kdl"]
+	path = libs/kdl
+	url = ../../orocos/orocos_kinematics_dynamics.git
+[submodule "kdl_parser"]
+	path = libs/kdl_parser
+	url = ../../ros/kdl_parser.git
