@@ -8,10 +8,14 @@
 #include <pinocchio/algorithm/rnea.hpp>
 #include <pinocchio/algorithm/aba.hpp>
 
+#include "models.h"
+
 static void BM_Pinocchio_RNEA(benchmark::State& state)
 {
   se3::Model model;
-  se3::urdf::buildModel("models/simple_humanoid.urdf", se3::JointModelFreeFlyer(), model);
+  se3::urdf::buildModel(pinocchio_benchmarks::path +
+      pinocchio_benchmarks::models[state.range(0)],
+      se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 
   Eigen::VectorXd q = Eigen::VectorXd::Zero(model.nq);
@@ -31,11 +35,15 @@ static void BM_Pinocchio_RNEA(benchmark::State& state)
   }
 }
 
-
 static void BM_Pinocchio_ABA(benchmark::State& state)
 {
+  std::string model_file = pinocchio_benchmarks::path +
+    pinocchio_benchmarks::models[state.range(0)];
+
   se3::Model model;
-  se3::urdf::buildModel("models/simple_humanoid.urdf", se3::JointModelFreeFlyer(), model);
+  se3::urdf::buildModel(pinocchio_benchmarks::path +
+      pinocchio_benchmarks::models[state.range(0)],
+      se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 
   Eigen::VectorXd q = Eigen::VectorXd::Zero(model.nq);
@@ -55,7 +63,7 @@ static void BM_Pinocchio_ABA(benchmark::State& state)
   }
 }
 
-BENCHMARK(BM_Pinocchio_RNEA);
-BENCHMARK(BM_Pinocchio_ABA);
+BENCHMARK(BM_Pinocchio_RNEA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
+BENCHMARK(BM_Pinocchio_ABA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
 
 BENCHMARK_MAIN();

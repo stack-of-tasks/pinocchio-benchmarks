@@ -1,12 +1,20 @@
-[submodule "libs/kdl"]
-	path = libs/kdl
-	url = https://github.com/orocos/orocos_kinematics_dynamics.git
-[submodule "libs/pinocchio"]
+[submodule "pinocchio"]
 	path = libs/pinocchio
-	url = https://github.com/stack-of-tasks/pinocchio.git
+	url = ../../stack-of-tasks/pinocchio.git
+	shallow = true
+	fetchRecurseSubmodules = true
 [submodule "benchmark"]
-	path = benchmark
-	url = https://github.com/google/benchmark.git
-[submodule "googletest"]
-	path = googletest
-	url = https://github.com/google/googletest.git
+	path = libs/benchmark
+	url = ../../google/benchmark.git
+	shallow = true
+	fetchRecurseSubmodules = false
+[submodule "nao"]
+	path = libs/nao_description
+	url = ../../iaslab-unipd/nao_description.git
+	shallow = true
+	fetchRecurseSubmodules = false
+[submodule "poppy"]
+	path = libs/poppy-humanoid
+	url = ../../poppy-project/poppy-humanoid.git
+	shallow = true
+	fetchRecurseSubmodules = false

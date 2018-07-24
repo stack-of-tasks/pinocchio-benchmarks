@@ -1,0 +1,19 @@
+#ifndef __pinocchio_benchmarks_models__
+#define __pinocchio_benchmarks_models__
+
+#include <boost/array.hpp>
+
+namespace pinocchio_benchmarks
+{
+    static const std::string path = "@CMAKE_INSTALL_PREFIX@/share/pinocchio-benchmarks/models/";
+
+    static const boost::array<std::string, 4> models =
+    {
+        "simple_humanoid.urdf",
+        "romeo.urdf",
+        "nao_robot_v4.urdf",
+        "Poppy_Humanoid.URDF"
+    };
+}
+
+#endif

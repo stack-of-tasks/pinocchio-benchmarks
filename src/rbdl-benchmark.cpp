@@ -6,10 +6,13 @@
 #include <rbdl/rbdl.h>
 #include <rbdl/addons/urdfreader/urdfreader.h>
 
+#include "models.h"
+
 static void BM_RBDL_RNEA(benchmark::State& state)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
-  RigidBodyDynamics::Addons::URDFReadFromFile("models/simple_humanoid.urdf", model, true);
+  RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
+      pinocchio_benchmarks::models[state.range(0)]).c_str(), model, true);
 
   RigidBodyDynamics::Math::VectorNd q =
     RigidBodyDynamics::Math::VectorNd::Zero(model->q_size);
@@ -30,12 +33,15 @@ static void BM_RBDL_RNEA(benchmark::State& state)
 
     RigidBodyDynamics::InverseDynamics(*model, q, qdot, tau, qddot);
   }
+
+  delete model;
 }
 
 static void BM_RBDL_ABA(benchmark::State& state)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
-  RigidBodyDynamics::Addons::URDFReadFromFile("models/simple_humanoid.urdf", model, true);
+  RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
+      pinocchio_benchmarks::models[state.range(0)]).c_str(), model, true);
 
   RigidBodyDynamics::Math::VectorNd q =
     RigidBodyDynamics::Math::VectorNd::Zero(model->q_size);
@@ -56,10 +62,12 @@ static void BM_RBDL_ABA(benchmark::State& state)
 
     RigidBodyDynamics::ForwardDynamics(*model, q, qdot, tau, qddot);
   }
+
+  delete model;
 }
 
 
-BENCHMARK(BM_RBDL_RNEA);
-BENCHMARK(BM_RBDL_ABA);
+BENCHMARK(BM_RBDL_RNEA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
+BENCHMARK(BM_RBDL_ABA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
 
 BENCHMARK_MAIN();
