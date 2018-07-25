@@ -12,7 +12,8 @@ static void BM_RBDL_RNEA(benchmark::State& state)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      pinocchio_benchmarks::models[state.range(0)]).c_str(), model, true);
+      pinocchio_benchmarks::models[(unsigned long)state.range(0)]).c_str(),
+      model, true);
 
   RigidBodyDynamics::Math::VectorNd q =
     RigidBodyDynamics::Math::VectorNd::Zero(model->q_size);
@@ -41,7 +42,8 @@ static void BM_RBDL_ABA(benchmark::State& state)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      pinocchio_benchmarks::models[state.range(0)]).c_str(), model, true);
+      pinocchio_benchmarks::models[(unsigned long)state.range(0)]).c_str(),
+      model, true);
 
   RigidBodyDynamics::Math::VectorNd q =
     RigidBodyDynamics::Math::VectorNd::Zero(model->q_size);
