@@ -1,5 +1,11 @@
 # Benchmarking Pinocchio
 
+Using docker:
+
+```
+docker run --rm -it gepetto/pinocchio-benchmarks
+```
+
 ## Install Pinocchio & KDL binaries
 
 ```
