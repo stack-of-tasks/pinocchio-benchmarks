@@ -1,4 +1,7 @@
-FROM ubuntu:18.04
+ARG IMAGE=ubuntu
+ARG TAG=18.04
+
+FROM ${IMAGE}:${TAG}
 
 RUN mkdir /benchmarks
 WORKDIR /benchmarks
