@@ -12,7 +12,6 @@ RUN apt update -qqy \
     clang-6.0 \
     cmake \
     libboost-all-dev \
-    libeigen3-dev \
     liburdfdom-dev
 
 ADD . .

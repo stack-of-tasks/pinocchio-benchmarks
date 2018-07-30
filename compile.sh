@@ -3,15 +3,24 @@
 set -e
 set -x
 
-#rm -rf build prefix
+[[ -d build || -d prefix ]] && rm -rf build prefix
 
 export PREFIX=${1:-$PWD/prefix}  # with bash / zsh
+export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig:${PREFIX}/share/pkgconfig
 export CXX="ccache clang++-6.0"
 export CC="ccache clang-6.0"
+
+mkdir -p build/eigen
+pushd build/eigen
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    ../../libs/eigen
+make -j8 install
+popd
 
 mkdir -p build/pinocchio
 pushd build/pinocchio
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_PREFIX_PATH=$PREFIX \
     -DBUILD_PYTHON_INTERFACE=OFF -DBUILD_UNIT_TESTS=OFF -DINSTALL_DOCUMENTATION=OFF \
     ../../libs/pinocchio
 make -j8 install
@@ -42,6 +51,7 @@ fi
 mkdir -p build/rbdl
 pushd build/rbdl
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_PREFIX_PATH="$PREFIX;/usr" \
     -DRBDL_BUILD_ADDON_URDFREADER=ON \
     ../../libs/rbdl
 make -j8 install
@@ -50,6 +60,7 @@ popd
 mkdir -p build/google-benchmark
 pushd build/google-benchmark
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_PREFIX_PATH=$PREFIX \
     -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
     ../../libs/benchmark
 make -j8 install

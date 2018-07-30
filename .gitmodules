@@ -24,3 +24,6 @@
 [submodule "kdl_parser"]
 	path = libs/kdl_parser
 	url = ../../ros/kdl_parser.git
+[submodule "eigen"]
+	path = libs/eigen
+	url = ../../eigenteam/eigen-git-mirror
