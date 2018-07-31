@@ -27,6 +27,7 @@ static void BM_Pinocchio_RNEA(benchmark::State& state)
   {
     state.PauseTiming();
     q = Eigen::VectorXd::Random(model.nq);
+    q.segment(0, 4).normalize();
     qdot = Eigen::VectorXd::Random(model.nv);
     qddot = Eigen::VectorXd::Random(model.nv);
     state.ResumeTiming();
@@ -52,6 +53,7 @@ static void BM_Pinocchio_ABA(benchmark::State& state)
   {
     state.PauseTiming();
     q = Eigen::VectorXd::Random(model.nq);
+    q.segment(0, 4).normalize();
     qdot = Eigen::VectorXd::Random(model.nv);
     tau = Eigen::VectorXd::Random(model.nv);
     state.ResumeTiming();

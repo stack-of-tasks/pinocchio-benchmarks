@@ -25,7 +25,8 @@ void pinocchio_test(std::string model_file)
   Eigen::VectorXd qdot = Eigen::VectorXd::Zero(model.nv);
   Eigen::VectorXd tau = Eigen::VectorXd::Zero(model.nv);
   Eigen::VectorXd qddot = Eigen::VectorXd::Zero(model.nv);
-  q[0] = 1;
+  q(0) = 1;
+  q.segment(0, 4).normalize();
 
   se3::aba(model, data, q, qdot, tau);
   std::cout << "qddot after ABA: " << data.ddq.transpose() << std::endl;

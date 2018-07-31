@@ -25,7 +25,8 @@ void rbdl_test(std::string model_file)
     RigidBodyDynamics::Math::VectorNd::Zero(model->qdot_size);
   RigidBodyDynamics::Math::VectorNd qddot =
     RigidBodyDynamics::Math::VectorNd::Zero(model->qdot_size);
-  q[0] = 1;
+  q(0) = 1;
+  q.segment(0, 4).normalize();
 
   RigidBodyDynamics::ForwardDynamics(*model, q, qdot, tau, qddot);
   std::cout << "qddot after ABA: " << qddot.transpose() << std::endl;

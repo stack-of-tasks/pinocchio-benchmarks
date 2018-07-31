@@ -28,6 +28,7 @@ static void BM_RBDL_RNEA(benchmark::State& state)
   {
     state.PauseTiming();
     q = RigidBodyDynamics::Math::VectorNd::Random(model->q_size);
+    q.segment(0, 4).normalize();
     qdot = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
     qddot = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
     state.ResumeTiming();
@@ -58,6 +59,7 @@ static void BM_RBDL_ABA(benchmark::State& state)
   {
     state.PauseTiming();
     q = RigidBodyDynamics::Math::VectorNd::Random(model->q_size);
+    q.segment(0, 4).normalize();
     qdot = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
     tau = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
     state.ResumeTiming();
