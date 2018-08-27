@@ -11,3 +11,5 @@ $PREFIX/bin/pinocchio-test
 #$PREFIX/bin/kdl-test
 $PREFIX/bin/pinocchio-benchmark
 $PREFIX/bin/rbdl-benchmark
+$PREFIX/bin/benchmarks-pinocchio
+$PREFIX/bin/benchmarks-rbdl
