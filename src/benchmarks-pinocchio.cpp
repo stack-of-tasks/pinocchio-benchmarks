@@ -6,7 +6,7 @@
 #include <pinocchio/algorithm/rnea.hpp>
 #include <pinocchio/algorithm/aba.hpp>
 
-#include <pinocchio/tools/timer.hpp>
+#include <pinocchio/utils/timer.hpp>
 
 #include <Eigen/StdVector>
 EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
@@ -17,7 +17,7 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
 
 void benchmark_pinocchio_rnea(std::string model_file)
 {
-  StackTicToc timer(StackTicToc::NS);
+  PinocchioTicToc timer(PinocchioTicToc::NS);
 
   se3::Model model;
   se3::urdf::buildModel(pinocchio_benchmarks::path + model_file,
@@ -46,7 +46,7 @@ void benchmark_pinocchio_rnea(std::string model_file)
 
 void benchmark_pinocchio_aba(std::string model_file)
 {
-  StackTicToc timer(StackTicToc::NS);
+  PinocchioTicToc timer(PinocchioTicToc::NS);
 
   se3::Model model;
   se3::urdf::buildModel(pinocchio_benchmarks::path + model_file,

@@ -4,7 +4,7 @@
 #include <rbdl/rbdl.h>
 #include <rbdl/addons/urdfreader/urdfreader.h>
 
-#include <pinocchio/tools/timer.hpp>
+#include <pinocchio/utils/timer.hpp>
 
 #include <Eigen/StdVector>
 EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(RigidBodyDynamics::Math::VectorNd)
@@ -15,7 +15,7 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(RigidBodyDynamics::Math::VectorNd)
 
 void benchmark_rbdl_rnea(std::string model_file)
 {
-  StackTicToc timer(StackTicToc::NS);
+  PinocchioTicToc timer(PinocchioTicToc::NS);
 
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
@@ -46,7 +46,7 @@ void benchmark_rbdl_rnea(std::string model_file)
 
 void benchmark_rbdl_aba(std::string model_file)
 {
-  StackTicToc timer(StackTicToc::NS);
+  PinocchioTicToc timer(PinocchioTicToc::NS);
 
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
