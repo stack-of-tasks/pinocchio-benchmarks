@@ -12,8 +12,6 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
 
 #include "models.h"
 
-#define NBT 100 * 1000
-
 void benchmark_pinocchio_rnea(std::string model_file, std::string filename)
 {
   se3::Model model;

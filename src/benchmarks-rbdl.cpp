@@ -10,8 +10,6 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(RigidBodyDynamics::Math::VectorNd)
 
 #include "models.h"
 
-#define NBT 100 * 1000
-
 void benchmark_rbdl_rnea(std::string model_file, std::string filename)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();

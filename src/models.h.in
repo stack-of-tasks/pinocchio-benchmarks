@@ -5,6 +5,8 @@
 
 #include <boost/array.hpp>
 
+#define NBT 100 * 1000
+
 namespace pinocchio_benchmarks
 {
     static const std::string path = "@CMAKE_INSTALL_PREFIX@/share/pinocchio-benchmarks/models/";
