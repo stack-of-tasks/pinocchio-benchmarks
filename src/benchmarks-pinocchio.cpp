@@ -33,8 +33,7 @@ void benchmark_pinocchio_rnea(std::string model_file, std::string filename)
     taus[i] = Eigen::VectorXd::Random(model.nq);
   }
 
-  std::ofstream file;
-  file.open(filename);
+  std::ofstream file(filename);
   for(size_t i=0; i<NBT; i++)
   {
     auto start = std::chrono::high_resolution_clock::now();
@@ -67,8 +66,7 @@ void benchmark_pinocchio_aba(std::string model_file, std::string filename)
     taus[i] = Eigen::VectorXd::Random(model.nq);
   }
 
-  std::ofstream file;
-  file.open(filename);
+  std::ofstream file(filename);
   for(size_t i=0; i<NBT; i++)
   {
     auto start = std::chrono::high_resolution_clock::now();

@@ -30,8 +30,7 @@ void benchmark_rbdl_rnea(std::string model_file, std::string filename)
     taus[i] = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
   }
 
-  std::ofstream file;
-  file.open(filename);
+  std::ofstream file(filename);
   for(size_t i=0; i<NBT; i++)
   {
     auto start = std::chrono::high_resolution_clock::now();
@@ -65,8 +64,7 @@ void benchmark_rbdl_aba(std::string model_file, std::string filename)
     taus[i] = RigidBodyDynamics::Math::VectorNd::Random(model->qdot_size);
   }
 
-  std::ofstream file;
-  file.open(filename);
+  std::ofstream file(filename);
   for(size_t i=0; i<NBT; i++)
   {
     auto start = std::chrono::high_resolution_clock::now();
