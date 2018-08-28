@@ -11,7 +11,7 @@
 void pinocchio_test(std::string model_file)
 {
   se3::Model model;
-  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file,
+  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file + ".urdf",
       se3::JointModelFreeFlyer(), model);
 
   std::cout << "Pinocchio Test" << std::endl;

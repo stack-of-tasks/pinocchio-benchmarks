@@ -10,7 +10,7 @@ void rbdl_test(std::string model_file)
 {
   RigidBodyDynamics::Model* model = new RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      model_file).c_str(), model, true);
+      model_file + ".urdf").c_str(), model, true);
 
   std::cout << "RBDL Test" << std::endl;
   std::cout << "  model: " << model_file << std::endl;

@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 #include <fstream>
 
@@ -6,8 +7,6 @@
 #include <pinocchio/algorithm/rnea.hpp>
 #include <pinocchio/algorithm/aba.hpp>
 
-#include <pinocchio/utils/timer.hpp>
-
 #include <Eigen/StdVector>
 EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
 
@@ -15,12 +14,10 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
 
 #define NBT 100 * 1000
 
-void benchmark_pinocchio_rnea(std::string model_file)
+void benchmark_pinocchio_rnea(std::string model_file, std::string filename)
 {
-  PinocchioTicToc timer(PinocchioTicToc::NS);
-
   se3::Model model;
-  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file,
+  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file + ".urdf",
       se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 
@@ -38,18 +35,23 @@ void benchmark_pinocchio_rnea(std::string model_file)
     taus[i] = Eigen::VectorXd::Random(model.nq);
   }
 
-  timer.tic();
-  for(size_t i=0; i<NBT; i++) se3::rnea(model, data, qs[i], qdots[i], taus[i]);
-  std::cout << "Pinocchio RNEA " << model_file << " \t ";
-  timer.toc(std::cout, NBT);
+  std::ofstream file;
+  file.open(filename);
+  for(size_t i=0; i<NBT; i++)
+  {
+    auto start = std::chrono::high_resolution_clock::now();
+    se3::rnea(model, data, qs[i], qdots[i], taus[i]);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::nanoseconds time = end - start;
+    file << time.count() << std::endl;
+  }
+  file.close();
 }
 
-void benchmark_pinocchio_aba(std::string model_file)
+void benchmark_pinocchio_aba(std::string model_file, std::string filename)
 {
-  PinocchioTicToc timer(PinocchioTicToc::NS);
-
   se3::Model model;
-  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file,
+  se3::urdf::buildModel(pinocchio_benchmarks::path + model_file + ".urdf",
       se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 
@@ -67,18 +69,27 @@ void benchmark_pinocchio_aba(std::string model_file)
     taus[i] = Eigen::VectorXd::Random(model.nq);
   }
 
-  timer.tic();
-  for(size_t i=0; i<NBT; i++) se3::aba(model, data, qs[i], qdots[i], taus[i]);
-  std::cout << "Pinocchio ABA  " << model_file << " \t ";
-  timer.toc(std::cout, NBT);
+  std::ofstream file;
+  file.open(filename);
+  for(size_t i=0; i<NBT; i++)
+  {
+    auto start = std::chrono::high_resolution_clock::now();
+    se3::aba(model, data, qs[i], qdots[i], taus[i]);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::nanoseconds time = end - start;
+    file << time.count() << std::endl;
+  }
+  file.close();
 }
 
 int main()
 {
   for (auto& model : pinocchio_benchmarks::models)
-    benchmark_pinocchio_rnea(model);
+    benchmark_pinocchio_rnea(model, pinocchio_benchmarks::get_filename(
+          "Pinocchio", "RNEA", model));
   for (auto& model : pinocchio_benchmarks::models)
-    benchmark_pinocchio_aba(model);
+    benchmark_pinocchio_aba(model, pinocchio_benchmarks::get_filename(
+          "Pinocchio", "ABA", model));
 
   return 0;
 }

@@ -14,7 +14,7 @@ static void BM_Pinocchio_RNEA(benchmark::State& state)
 {
   se3::Model model;
   se3::urdf::buildModel(pinocchio_benchmarks::path +
-      pinocchio_benchmarks::models[(unsigned long)state.range(0)],
+      pinocchio_benchmarks::models[(unsigned long)state.range(0)] + ".urdf",
       se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 
@@ -40,7 +40,7 @@ static void BM_Pinocchio_ABA(benchmark::State& state)
 {
   se3::Model model;
   se3::urdf::buildModel(pinocchio_benchmarks::path +
-      pinocchio_benchmarks::models[(unsigned long)state.range(0)],
+      pinocchio_benchmarks::models[(unsigned long)state.range(0)] + ".urdf",
       se3::JointModelFreeFlyer(), model);
   se3::Data data(model);
 

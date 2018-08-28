@@ -1,6 +1,8 @@
 #ifndef __pinocchio_benchmarks_models__
 #define __pinocchio_benchmarks_models__
 
+#include <unistd.h>
+
 #include <boost/array.hpp>
 
 namespace pinocchio_benchmarks
@@ -9,14 +11,22 @@ namespace pinocchio_benchmarks
 
     static const boost::array<std::string, 7> models =
     {
-        "simple.urdf",
-        "romeo.urdf",
-        "nao.urdf",
-        "poppy.urdf",
-        "lwr.urdf",
-        "atlas.urdf",
-        "hyq.urdf"
+        "simple",
+        "romeo",
+        "nao",
+        "poppy",
+        "lwr",
+        "atlas",
+        "hyq"
     };
+
+    inline static std::string get_filename(std::string lib, std::string algo, std::string model)
+    {
+      char hostname_c[50];
+      gethostname(hostname_c, sizeof(hostname_c));
+      std::string hostname(hostname_c);
+      return "data/" + hostname + "_" + lib + "_" + algo + "_" + model + ".txt";
+    }
 }
 
 #endif
