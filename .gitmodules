@@ -27,3 +27,15 @@
 [submodule "eigen"]
 	path = libs/eigen
 	url = ../../eigenteam/eigen-git-mirror
+[submodule "hyq"]
+	path = libs/hyq-description
+	url = ../../iit-DLSLab/hyq-description.git
+[submodule "lwr"]
+	path = libs/lwr-robot-description
+	url = ../../corlab/lwr-robot-description.git
+[submodule "atlas"]
+	path = libs/ihmc_atlas_ros
+	url = ../../ihmcrobotics/ihmc_atlas_ros.git
+[submodule "sensors-description"]
+	path = libs/sensors-description
+	url = ../../iit-DLSLab/sensors-description

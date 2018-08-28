@@ -7,12 +7,15 @@ namespace pinocchio_benchmarks
 {
     static const std::string path = "@CMAKE_INSTALL_PREFIX@/share/pinocchio-benchmarks/models/";
 
-    static const boost::array<std::string, 4> models =
+    static const boost::array<std::string, 7> models =
     {
         "simple_humanoid.urdf",
         "romeo_small.urdf",
         "nao_robot_v4.urdf",
-        "Poppy_Humanoid.URDF"
+        "Poppy_Humanoid.URDF",
+        "lwr-robot2.urdf",
+        "atlas_unplugged_v5_no_hands.urdf",
+        "hyq.urdf"
     };
 }
 

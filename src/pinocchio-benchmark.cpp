@@ -62,7 +62,7 @@ static void BM_Pinocchio_ABA(benchmark::State& state)
   }
 }
 
-BENCHMARK(BM_Pinocchio_RNEA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
-BENCHMARK(BM_Pinocchio_ABA)->Arg(0)->Arg(1)->Arg(2)->Arg(3);
+BENCHMARK(BM_Pinocchio_RNEA)->Arg(0)->Arg(1)->Arg(2)->Arg(3)->Arg(4)->Arg(5)->Arg(6);
+BENCHMARK(BM_Pinocchio_ABA)->Arg(0)->Arg(1)->Arg(2)->Arg(3)->Arg(4)->Arg(5)->Arg(6);
 
 BENCHMARK_MAIN();
