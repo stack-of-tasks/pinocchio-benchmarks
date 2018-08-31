@@ -395,7 +395,13 @@
     <material>Gazebo/White</material>
   </gazebo>
   <!-- Base footprint -->
-  <link name="base_footprint"/>
+  <link name="base_footprint">
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
   <joint name="base_footprint_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.0985"/>
     <child link="base_link"/>
