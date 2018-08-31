@@ -29,6 +29,8 @@ SET(MODELS
   lwr
   atlas
   hyq
+  talos
+  tiago
   )
 
 LIST(LENGTH MODELS MODELS_LEN)

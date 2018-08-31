@@ -42,3 +42,12 @@
 [submodule "metapod"]
 	path = libs/metapod
 	url = ../../laas/metapod
+[submodule "talos"]
+	path = libs/talos_robot
+	url = ../../pal-robotics/talos_robot.git
+[submodule "tiago"]
+	path = libs/tiago_robot
+	url = ../../pal-robotics/tiago_robot.git
+[submodule "pr2"]
+	path = libs/pr2
+	url = ../../pr2/pr2_common.git
