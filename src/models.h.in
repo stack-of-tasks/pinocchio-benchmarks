@@ -11,23 +11,19 @@ namespace pinocchio_benchmarks
 {
     static const std::string path = "@CMAKE_INSTALL_PREFIX@/share/pinocchio-benchmarks/models/";
 
-    static const boost::array<std::string, 7> models =
-    {
-        "simple",
-        "romeo",
-        "nao",
-        "poppy",
-        "lwr",
-        "atlas",
-        "hyq"
-    };
+    static const boost::array<std::string, @MODELS_LEN@> models = { "@MODELS_CXX@" };
 
-    inline static std::string get_filename(std::string lib, std::string algo, std::string model)
+    inline static std::string get_log_filename(std::string lib, std::string algo, std::string model)
     {
       char hostname_c[50];
       gethostname(hostname_c, sizeof(hostname_c));
       std::string hostname(hostname_c);
       return "data/" + hostname + "_" + lib + "_" + algo + "_" + model + ".txt";
+    }
+
+    inline static bool free_flyer(std::string model)
+    {
+        return model != "lwr";
     }
 }
 

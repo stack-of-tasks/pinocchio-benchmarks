@@ -39,3 +39,6 @@
 [submodule "sensors-description"]
 	path = libs/sensors-description
 	url = ../../iit-DLSLab/sensors-description
+[submodule "metapod"]
+	path = libs/metapod
+	url = ../../laas/metapod
