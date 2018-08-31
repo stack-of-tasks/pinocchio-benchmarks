@@ -7,7 +7,7 @@ include("models.jl")
 
 function julia_test(model)
     robot = parse_urdf(Float64, PATH * "$model.urdf")
-    if model != "lwr"
+    if model != "lwr" && model != "tiago"
         for joint in out_joints(root_body(robot), robot)
             floatingjoint = Joint(string(joint), frame_before(joint), frame_after(joint), QuaternionFloating{Float64}())
             replace_joint!(robot, joint, floatingjoint)

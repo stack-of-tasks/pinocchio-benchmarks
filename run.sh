@@ -6,11 +6,11 @@ set -x
 export PREFIX=${1:-$PWD/prefix}  # with bash / zsh
 export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
 
-$PREFIX/bin/rbdl-test
-$PREFIX/bin/pinocchio-test
-$PREFIX/bin/kdl-test
+$PREFIX/bin/rbdl-test > /tmp/rbdl.txt
+$PREFIX/bin/pinocchio-test > /tmp/pinocchio.txt
+$PREFIX/bin/kdl-test > /tmp/kdl.txt
 #$PREFIX/bin/metapod-test
-$PREFIX/bin/julia-test.jl
+#$PREFIX/bin/julia-test.jl
 
 $PREFIX/bin/benchmarks-pinocchio
 $PREFIX/bin/benchmarks-rbdl

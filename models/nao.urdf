@@ -7,7 +7,13 @@
   <!-- Macro for insert a link visualization -->
   <!-- Macro for insert a link collision -->
   <!-- dummy first link, directly connects with torso -->
-  <link name="base_link"/>
+  <link name="base_link">
+    <inertial>
+      <mass value="0.000001"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </inertial>
+  </link>
   <!-- MACRO FOR DEFINE LINK-->
   <link name="Torso">
     <inertial>

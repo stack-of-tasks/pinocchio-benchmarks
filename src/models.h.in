@@ -23,7 +23,7 @@ namespace pinocchio_benchmarks
 
     inline static bool free_flyer(std::string model)
     {
-        return model != "lwr";
+        return model != "lwr" && model != "tiago";
     }
 }
 

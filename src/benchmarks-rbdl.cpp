@@ -12,9 +12,9 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(RigidBodyDynamics::Math::VectorNd)
 
 void benchmark_rbdl_rnea(std::string model, std::string log_filename)
 {
-  RigidBodyDynamics::Model* robot = new RigidBodyDynamics::Model();
+  RigidBodyDynamics::Model robot = RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      model + ".urdf").c_str(), robot,
+      model + ".urdf").c_str(), &robot,
       pinocchio_benchmarks::free_flyer(model));
 
   std::vector<RigidBodyDynamics::Math::VectorNd> qs(NBT);
@@ -24,11 +24,11 @@ void benchmark_rbdl_rnea(std::string model, std::string log_filename)
 
   for(size_t i=0; i<NBT; i++)
   {
-    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->q_size);
-    if (robot->q_size > robot->qdot_size) qs[i].segment(0, 4).normalize();
-    qdots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
-    qddots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
-    taus[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
+    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.q_size);
+    if (robot.q_size > robot.qdot_size) qs[i].segment(0, 4).normalize();
+    qdots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
+    qddots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
+    taus[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
   }
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
@@ -36,33 +36,31 @@ void benchmark_rbdl_rnea(std::string model, std::string log_filename)
   for(size_t i=0; i<NBT; i++)
   {
     start = std::chrono::high_resolution_clock::now();
-    RigidBodyDynamics::InverseDynamics(*robot, qs[i], qdots[i], qddots[i], taus[i]);
+    RigidBodyDynamics::InverseDynamics(robot, qs[i], qdots[i], qddots[i], taus[i]);
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
     file << time.count() << std::endl;
   }
   file.close();
-
-  delete robot;
 }
 
 void benchmark_rbdl_crba(std::string model, std::string log_filename)
 {
-  RigidBodyDynamics::Model* robot = new RigidBodyDynamics::Model();
+  RigidBodyDynamics::Model robot = RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      model + ".urdf").c_str(), robot,
+      model + ".urdf").c_str(), &robot,
       pinocchio_benchmarks::free_flyer(model));
 
   RigidBodyDynamics::Math::MatrixNd h =
     RigidBodyDynamics::Math::MatrixNd::Constant(
-        robot->dof_count, robot->dof_count, 0);
+        robot.dof_count, robot.dof_count, 0);
 
   std::vector<RigidBodyDynamics::Math::VectorNd> qs(NBT);
 
   for(size_t i=0; i<NBT; i++)
   {
-    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->q_size);
-    if (robot->q_size > robot->qdot_size) qs[i].segment(0, 4).normalize();
+    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.q_size);
+    if (robot.q_size > robot.qdot_size) qs[i].segment(0, 4).normalize();
   }
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
@@ -70,21 +68,19 @@ void benchmark_rbdl_crba(std::string model, std::string log_filename)
   for(size_t i=0; i<NBT; i++)
   {
     start = std::chrono::high_resolution_clock::now();
-    RigidBodyDynamics::CompositeRigidBodyAlgorithm(*robot, qs[i], h);
+    RigidBodyDynamics::CompositeRigidBodyAlgorithm(robot, qs[i], h);
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
     file << time.count() << std::endl;
   }
   file.close();
-
-  delete robot;
 }
 
 void benchmark_rbdl_aba(std::string model, std::string log_filename)
 {
-  RigidBodyDynamics::Model* robot = new RigidBodyDynamics::Model();
+  RigidBodyDynamics::Model robot = RigidBodyDynamics::Model();
   RigidBodyDynamics::Addons::URDFReadFromFile((pinocchio_benchmarks::path +
-      model + ".urdf").c_str(), robot,
+      model + ".urdf").c_str(), &robot,
       pinocchio_benchmarks::free_flyer(model));
 
   std::vector<RigidBodyDynamics::Math::VectorNd> qs(NBT);
@@ -94,11 +90,11 @@ void benchmark_rbdl_aba(std::string model, std::string log_filename)
 
   for(size_t i=0; i<NBT; i++)
   {
-    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->q_size);
-    if (robot->q_size > robot->qdot_size) qs[i].segment(0, 4).normalize();
-    qdots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
-    qddots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
-    taus[i] = RigidBodyDynamics::Math::VectorNd::Random(robot->qdot_size);
+    qs[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.q_size);
+    if (robot.q_size > robot.qdot_size) qs[i].segment(0, 4).normalize();
+    qdots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
+    qddots[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
+    taus[i] = RigidBodyDynamics::Math::VectorNd::Random(robot.qdot_size);
   }
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
@@ -106,14 +102,12 @@ void benchmark_rbdl_aba(std::string model, std::string log_filename)
   for(size_t i=0; i<NBT; i++)
   {
     start = std::chrono::high_resolution_clock::now();
-    RigidBodyDynamics::ForwardDynamics(*robot, qs[i], qdots[i], taus[i], qddots[i]);
+    RigidBodyDynamics::ForwardDynamics(robot, qs[i], qdots[i], taus[i], qddots[i]);
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
     file << time.count() << std::endl;
   }
   file.close();
-
-  delete robot;
 }
 
 int main()

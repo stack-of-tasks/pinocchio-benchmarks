@@ -44,12 +44,6 @@ void kdl_test(std::string model)
 
 int main()
 {
-  for (auto& model : pinocchio_benchmarks::models)
-  {
-    if (!pinocchio_benchmarks::free_flyer(model))
-    {
-      kdl_test(model);
-    }
-  }
+  kdl_test("lwr");
   return 0;
 }

@@ -43,7 +43,7 @@ void pinocchio_test(std::string model)
   }
 
   se3::crba(robot, data, q);
-  std::cout << "FD: M after CRBA: " << data.M << std::endl;
+  std::cout << "FD: M after CRBA: " << data.M(0,0) << std::endl;
 
   se3::aba(robot, data, q, qdot, tau);
   std::cout << "HD: qddot after ABA: " << data.ddq.transpose() << std::endl;

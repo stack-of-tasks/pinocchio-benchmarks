@@ -92,13 +92,11 @@ void benchmark_kdl_vc(std::string model, std::string log_filename)
 
 int main()
 {
-  for (auto& model : pinocchio_benchmarks::models)
-  {
-    benchmark_kdl_rnea(model, pinocchio_benchmarks::get_log_filename(
-          "KDL", "ID", model));
-    benchmark_kdl_vc(model, pinocchio_benchmarks::get_log_filename(
-          "KDL", "HD", model));
-  }
+  std::string model = "lwr";  // KDL have dynamic solvers only for chains
+  benchmark_kdl_rnea(model, pinocchio_benchmarks::get_log_filename(
+        "KDL", "ID", model));
+  benchmark_kdl_vc(model, pinocchio_benchmarks::get_log_filename(
+        "KDL", "HD", model));
 
   return 0;
 }
