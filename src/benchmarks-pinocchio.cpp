@@ -42,14 +42,14 @@ void benchmark_pinocchio_rnea(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+  start = std::chrono::high_resolution_clock::now();
   for (size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     se3::rnea(robot, data, qs[i], qdots[i], qddots[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
 
@@ -82,14 +82,14 @@ void benchmark_pinocchio_aba(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+    start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     se3::aba(robot, data, qs[i], qdots[i], taus[i]);
+  }
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
     file << time.count() << std::endl;
-  }
   file.close();
 }
 
@@ -118,14 +118,14 @@ void benchmark_pinocchio_crba(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+  start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     se3::crba(robot, data, qs[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
 

@@ -25,7 +25,5 @@ if __name__ == '__main__':
             for line in f.readlines():
                 data_2.append(log.stem.split('_') + [int(line)])
     df_2 = pandas.DataFrame(data_2, columns=['hostname', 'lib', 'algo', 'model', 'time'])
-    df_2.loc[df_2['algo'] == 'FD'].groupby('model').boxplot(by='lib', sym='')
-    df_2.loc[df_2['algo'] == 'ID'].groupby('model').boxplot(by='lib', sym='')
-    df_2.loc[df_2['algo'] == 'HD'].groupby('model').boxplot(by='lib', sym='')
-
+    df_2.loc[df_2['lib'] == 'Pinocchio'].groupby('algo').boxplot(by=['model'], sym='')
+    # df_2.loc[df_2['model'] == 'lwr']].groupby('algo').boxplot(by=['lib', 'model'], sym='')

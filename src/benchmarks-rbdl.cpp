@@ -33,14 +33,14 @@ void benchmark_rbdl_rnea(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+  start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     RigidBodyDynamics::InverseDynamics(robot, qs[i], qdots[i], qddots[i], taus[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
 
@@ -65,14 +65,14 @@ void benchmark_rbdl_crba(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+    start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     RigidBodyDynamics::CompositeRigidBodyAlgorithm(robot, qs[i], h);
+  }
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
     file << time.count() << std::endl;
-  }
   file.close();
 }
 
@@ -99,14 +99,14 @@ void benchmark_rbdl_aba(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+    start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     RigidBodyDynamics::ForwardDynamics(robot, qs[i], qdots[i], taus[i], qddots[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
 

@@ -1,16 +1,16 @@
 CONFIG_FILES(models.h models.jl)
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_BINARY_DIR}")
-SET(METAPOD_MODELS_DIR "${CMAKE_INSTALL_PREFIX}/include/pinocchio-benchmarks")
+#SET(METAPOD_MODELS_DIR "${CMAKE_INSTALL_PREFIX}/include/pinocchio-benchmarks")
 INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/models.jl" DESTINATION bin)
 
 # generate models for metapod from urdf files
-ADD_CUSTOM_TARGET(mk_metapod_models_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${METAPOD_MODELS_DIR})
-FOREACH(model ${MODELS})
-  EXECUTE_PROCESS(COMMAND
-    "${CMAKE_INSTALL_PREFIX}/bin/metapodfromurdf" --name ${model} --directory "${METAPOD_MODELS_DIR}/metapod_${model}"
-    "${CMAKE_SOURCE_DIR}/models/${model}.urdf"
-    )
-ENDFOREACH(model ${MODELS})
+#ADD_CUSTOM_TARGET(mk_metapod_models_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${METAPOD_MODELS_DIR})
+#FOREACH(model ${MODELS})
+  #EXECUTE_PROCESS(COMMAND
+    #"${CMAKE_INSTALL_PREFIX}/bin/metapodfromurdf" --name ${model} --directory "${METAPOD_MODELS_DIR}/metapod_${model}"
+    #"${CMAKE_SOURCE_DIR}/models/${model}.urdf"
+    #)
+#ENDFOREACH(model ${MODELS})
 
 # Tests
 
@@ -27,6 +27,7 @@ INSTALL(TARGETS pinocchio-test RUNTIME DESTINATION bin)
 
 # KDL test
 ADD_EXECUTABLE(kdl-test kdl-test)
+PKG_CONFIG_USE_DEPENDENCY(kdl-test orocos-kdl)
 PKG_CONFIG_USE_DEPENDENCY(kdl-test kdl_parser)
 INSTALL(TARGETS kdl-test RUNTIME DESTINATION bin)
 
@@ -70,6 +71,7 @@ INSTALL(TARGETS benchmarks-pinocchio RUNTIME DESTINATION bin)
 
 # KDL
 ADD_EXECUTABLE(benchmarks-kdl benchmarks-kdl)
+PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl orocos-kdl)
 PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl kdl_parser)
 INSTALL(TARGETS benchmarks-kdl RUNTIME DESTINATION bin)
 

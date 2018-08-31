@@ -19,7 +19,7 @@ void benchmark_kdl_rnea(std::string model, std::string log_filename)
   kdl_parser::treeFromFile(pinocchio_benchmarks::path + model + ".urdf", tree);
   tree.getChain("world_link", "lwr_arm_7_link", chain);
 
-  KDL::Wrenches f;
+  KDL::Wrenches f(chain.getNrOfSegments());
   KDL::Vector g_v(0, 0, -9.81);
   KDL::ChainIdSolver_RNE rnea_solver(chain, g_v);
 
@@ -38,17 +38,18 @@ void benchmark_kdl_rnea(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+  start = std::chrono::high_resolution_clock::now();
   for (size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     rnea_solver.CartToJnt(qs[i], qdots[i], qddots[i], f, taus[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
 
+/*
 void benchmark_kdl_vc(std::string model, std::string log_filename)
 {
   KDL::Chain chain;
@@ -79,24 +80,25 @@ void benchmark_kdl_vc(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
+  start = std::chrono::high_resolution_clock::now();
   for (size_t i=0; i<NBT; i++)
   {
-    start = std::chrono::high_resolution_clock::now();
     vc_solver.CartToJnt(qs[i], qdots[i], qddots[i], alpha, beta, f, taus[i]);
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
   }
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << time.count() << std::endl;
   file.close();
 }
+*/
 
 int main()
 {
   std::string model = "lwr";  // KDL have dynamic solvers only for chains
   benchmark_kdl_rnea(model, pinocchio_benchmarks::get_log_filename(
         "KDL", "ID", model));
-  benchmark_kdl_vc(model, pinocchio_benchmarks::get_log_filename(
-        "KDL", "HD", model));
+  //benchmark_kdl_vc(model, pinocchio_benchmarks::get_log_filename(
+        //"KDL", "HD", model));
 
   return 0;
 }

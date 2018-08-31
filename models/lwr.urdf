@@ -37,11 +37,11 @@
     <!--<child link="lwr_arm_base_link"/>-->
   <!--</joint>-->
   <link name="world_link">
-    <inertial>
-      <mass value="50.0"/>
-      <com xyz="0 0 0"/>
-      <inertia ixx="0.01" ixy="0.00" ixz="0.00" iyy="0.01" iyz="0.00" izz="0.01"/>
-    </inertial>
+    <!--<inertial>-->
+      <!--<mass value="50.0"/>-->
+      <!--<com xyz="0 0 0"/>-->
+      <!--<inertia ixx="0.01" ixy="0.00" ixz="0.00" iyy="0.01" iyz="0.00" izz="0.01"/>-->
+    <!--</inertial>-->
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0.95"/>
       <geometry>

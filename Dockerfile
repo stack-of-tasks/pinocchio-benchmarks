@@ -8,6 +8,7 @@ RUN apt update -qqy \
     ccache \
     clang-6.0 \
     cmake \
+    libcppunit-dev \
     libboost-all-dev \
     liburdfdom-dev
 
