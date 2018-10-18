@@ -1,0 +1,8 @@
+PATH = "@CMAKE_INSTALL_PREFIX@/share/pinocchio-benchmarks/models/"
+MODELS = ["@MODELS_CXX@"]
+NBT = 100 * 1000
+
+function get_log_filename(lib, algo, model)
+    hostname = gethostname()
+    "data/$hostname" * "_$lib" * "_$algo" * "_$model.txt"
+end

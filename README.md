@@ -1,14 +1,18 @@
 # Benchmarking Pinocchio
 
-## Setup your environment
+Using docker:
 
-You need both eigen2 (for KDL) and eigen3 (for RBDL & Pinocchio):
 ```
-sudo apt install -qqy libeigen{2,3}-dev
+docker run --rm -it gepetto/pinocchio-benchmarks
 ```
 
-You have to choose the `PREFIX` in which you want to install Pinocchio, RBDL & KDL:
+## Install Pinocchio & KDL binaries
 
+```
+sudo apt install -qqy robotpkg-pinocchio liborocos-kdl-dev libkdl-parser-dev
+```
+
+## Configure your prefix
 
 ```
 export PREFIX=$PWD/prefix  # with bash / zsh
@@ -18,68 +22,36 @@ set -x PREFIX $PWD/prefix  # with fish
 set -x LD_LIBRARY_PATH $PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
-## Pinocchio
-
-### Downloading
-
-If you did not clone this repository with the `--recursive` options, you will have to get the submodules with:
-```
-git submodule update --init --recursive
-```
-
-### Installing
-
-```
-mkdir -p build/pinocchio
-pushd build/pinocchio
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_CXX_STANDARD=11 ../../libs/pinocchio
-make -j8 install
-popd
-```
-
-## KDL
-
-### Installing
-
-```
-mkdir -p build/kdl
-pushd build/kdl
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX ../../libs/kdl/orocos_kdl
-make -j8 install
-popd
-```
-
-## RBDL
-
-### Downloading
-
-RBDL uses mercurial, and git-hg can't clone it, so we can't provide a git submodule, and you have to download it:
+## Install RBDL
 
 ```
 wget https://bitbucket.org/rbdl/rbdl/get/default.zip
 unzip default.zip
 rm default.zip
 mv rbdl-rbdl-* libs/rbdl
-```
-
-### Installing
-
-```
 mkdir -p build/rbdl
 pushd build/rbdl
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DRBDL_BUILD_ADDON_URDFREADER=ON ../../libs/rbdl
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DRBDL_BUILD_ADDON_URDFREADER=ON ../../libs/rbdl
 make -j8 install
 popd
 ```
 
-## Benchmarks
-
-### Installing
+## Install Google Benchmark
 
 ```
-mkdir -p build/benchmarks
-pushd build/benchmarks
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_PREFIX_PATH=$PREFIX ../..
+mkdir -p build/google-benchmark
+pushd build/google-benchmark
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DBENCHMARK_ENABLE_GTEST_TESTS=OFF ../../libs/benchmark
+make -j8 install
+popd
+```
+
+## Install
+
+```
+mkdir -p build/pinocchio-benchmarks
+pushd build/pinocchio-benchmarks
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_PREFIX_PATH=$PREFIX ../..
 make -j8 install
 popd
 ```
@@ -87,8 +59,10 @@ popd
 ### Running
 
 ```
-./prefix/bin/rbdl-bench models/simple_humanoid.urdf
-./prefix/bin/rbdl-bench models/romeo/romeo_description/urdf/romeo.urdf
-./prefix/bin/pinocchio-bench models/simple_humanoid.urdf
-./prefix/bin/pinocchio-bench models/romeo/romeo_description/urdf/romeo.urdf
+sudo cpupower frequency-set --governor performance
+$PREFIX/bin/rbdl-test
+$PREFIX/bin/pinocchio-test
+$PREFIX/bin/pinocchio-benchmark
+$PREFIX/bin/rbdl-benchmark
+sudo cpupower frequency-set --governor powersave
 ```
