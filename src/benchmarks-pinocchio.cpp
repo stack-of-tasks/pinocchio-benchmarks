@@ -15,18 +15,18 @@ EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION(Eigen::VectorXd)
 
 void benchmark_pinocchio_rnea(std::string model, std::string log_filename)
 {
-  se3::Model robot;
+  pinocchio::Model robot;
   if (pinocchio_benchmarks::free_flyer(model) && model != "atlas")
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
-        se3::JointModelFreeFlyer(), robot);
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+        pinocchio::JointModelFreeFlyer(), robot);
   }
   else
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
         robot);
   }
-  se3::Data data(robot);
+  pinocchio::Data data(robot);
 
   std::vector<Eigen::VectorXd> qs(NBT);
   std::vector<Eigen::VectorXd> qdots(NBT);
@@ -45,7 +45,7 @@ void benchmark_pinocchio_rnea(std::string model, std::string log_filename)
   start = std::chrono::high_resolution_clock::now();
   for (size_t i=0; i<NBT; i++)
   {
-    se3::rnea(robot, data, qs[i], qdots[i], qddots[i]);
+    pinocchio::rnea(robot, data, qs[i], qdots[i], qddots[i]);
   }
   end = std::chrono::high_resolution_clock::now();
   std::chrono::nanoseconds time = end - start;
@@ -55,18 +55,18 @@ void benchmark_pinocchio_rnea(std::string model, std::string log_filename)
 
 void benchmark_pinocchio_aba(std::string model, std::string log_filename)
 {
-  se3::Model robot;
+  pinocchio::Model robot;
   if (pinocchio_benchmarks::free_flyer(model) && model != "atlas")
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
-        se3::JointModelFreeFlyer(), robot);
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+        pinocchio::JointModelFreeFlyer(), robot);
   }
   else
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
         robot);
   }
-  se3::Data data(robot);
+  pinocchio::Data data(robot);
 
   std::vector<Eigen::VectorXd> qs(NBT);
   std::vector<Eigen::VectorXd> qdots(NBT);
@@ -85,7 +85,7 @@ void benchmark_pinocchio_aba(std::string model, std::string log_filename)
     start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    se3::aba(robot, data, qs[i], qdots[i], taus[i]);
+    pinocchio::aba(robot, data, qs[i], qdots[i], taus[i]);
   }
     end = std::chrono::high_resolution_clock::now();
     std::chrono::nanoseconds time = end - start;
@@ -95,18 +95,18 @@ void benchmark_pinocchio_aba(std::string model, std::string log_filename)
 
 void benchmark_pinocchio_crba(std::string model, std::string log_filename)
 {
-  se3::Model robot;
+  pinocchio::Model robot;
   if (pinocchio_benchmarks::free_flyer(model) && model != "atlas")
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
-        se3::JointModelFreeFlyer(), robot);
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+        pinocchio::JointModelFreeFlyer(), robot);
   }
   else
   {
-    se3::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
+    pinocchio::urdf::buildModel(pinocchio_benchmarks::path + model + ".urdf",
         robot);
   }
-  se3::Data data(robot);
+  pinocchio::Data data(robot);
 
   std::vector<Eigen::VectorXd> qs(NBT);
 
@@ -121,7 +121,7 @@ void benchmark_pinocchio_crba(std::string model, std::string log_filename)
   start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
-    se3::crba(robot, data, qs[i]);
+    pinocchio::crba(robot, data, qs[i]);
   }
   end = std::chrono::high_resolution_clock::now();
   std::chrono::nanoseconds time = end - start;

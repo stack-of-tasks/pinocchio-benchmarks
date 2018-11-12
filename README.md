@@ -60,9 +60,13 @@ popd
 
 ```
 sudo cpupower frequency-set --governor performance
+$PREFIX/bin/kdl-test
 $PREFIX/bin/rbdl-test
 $PREFIX/bin/pinocchio-test
-$PREFIX/bin/pinocchio-benchmark
-$PREFIX/bin/rbdl-benchmark
+$PREFIX/bin/benchmarks-pinocchio
+$PREFIX/bin/benchmarks-rbdl
+$PREFIX/bin/benchmarks-kdl
 sudo cpupower frequency-set --governor powersave
 ```
+
+Results are stored in `data/hostname_lib_algo_model.txt`
