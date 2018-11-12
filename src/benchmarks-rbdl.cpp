@@ -40,7 +40,7 @@ void benchmark_rbdl_rnea(std::string model, std::string log_filename)
   }
   end = std::chrono::high_resolution_clock::now();
   std::chrono::nanoseconds time = end - start;
-  file << time.count() << std::endl;
+  file << 1e-3*time.count() / (double)NBT << std::endl;
   file.close();
 }
 
@@ -65,14 +65,14 @@ void benchmark_rbdl_crba(std::string model, std::string log_filename)
 
   std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
   std::ofstream file(log_filename);
-    start = std::chrono::high_resolution_clock::now();
+  start = std::chrono::high_resolution_clock::now();
   for(size_t i=0; i<NBT; i++)
   {
     RigidBodyDynamics::CompositeRigidBodyAlgorithm(robot, qs[i], h);
   }
-    end = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds time = end - start;
-    file << time.count() << std::endl;
+  end = std::chrono::high_resolution_clock::now();
+  std::chrono::nanoseconds time = end - start;
+  file << 1e-3*time.count() / (double)NBT << std::endl;
   file.close();
 }
 
@@ -106,7 +106,7 @@ void benchmark_rbdl_aba(std::string model, std::string log_filename)
   }
   end = std::chrono::high_resolution_clock::now();
   std::chrono::nanoseconds time = end - start;
-  file << time.count() << std::endl;
+  file << 1e-3*time.count() / (double)NBT << std::endl;
   file.close();
 }
 
@@ -117,9 +117,9 @@ int main()
     benchmark_rbdl_rnea(model, pinocchio_benchmarks::get_log_filename(
           "RBDL", "ID", model));
     benchmark_rbdl_crba(model, pinocchio_benchmarks::get_log_filename(
-          "RBDL", "FD", model));
+          "RBDL", "CRBA", model));
     benchmark_rbdl_aba(model, pinocchio_benchmarks::get_log_filename(
-          "RBDL", "HD", model));
+          "RBDL", "FD", model));
   }
 
   return 0;
