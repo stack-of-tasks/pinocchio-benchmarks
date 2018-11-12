@@ -36,7 +36,7 @@
     <!--<parent link="world"/>-->
     <!--<child link="lwr_arm_base_link"/>-->
   <!--</joint>-->
-  <link name="world_link">
+  <link name="base_link">
     <!--<inertial>-->
       <!--<mass value="50.0"/>-->
       <!--<com xyz="0 0 0"/>-->
@@ -58,7 +58,7 @@
   <!-- First (shoulder) element of the arm. Fixed to its parent. -->
   <joint name="world_lwr_arm_base_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 1.1"/>
-    <parent link="world_link"/>
+    <parent link="base_link"/>
     <child link="lwr_arm_base_link"/>
   </joint>
   <link name="lwr_arm_base_link">
