@@ -5,7 +5,7 @@
 
 #include <boost/array.hpp>
 
-#define NBT 100 * 1000
+#define NBT (100 * 1000)
 
 namespace pinocchio_benchmarks
 {
