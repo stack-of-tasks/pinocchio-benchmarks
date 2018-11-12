@@ -12,11 +12,11 @@
 
 static void BM_Pinocchio_RNEA(benchmark::State& state)
 {
-  se3::Model model;
-  se3::urdf::buildModel(pinocchio_benchmarks::path +
+  pinocchio::Model model;
+  pinocchio::urdf::buildModel(pinocchio_benchmarks::path +
       pinocchio_benchmarks::models[(unsigned long)state.range(0)] + ".urdf",
-      se3::JointModelFreeFlyer(), model);
-  se3::Data data(model);
+      pinocchio::JointModelFreeFlyer(), model);
+  pinocchio::Data data(model);
 
   Eigen::VectorXd q = Eigen::VectorXd::Zero(model.nq);
   Eigen::VectorXd qdot = Eigen::VectorXd::Zero(model.nv);
@@ -32,17 +32,17 @@ static void BM_Pinocchio_RNEA(benchmark::State& state)
     qddot = Eigen::VectorXd::Random(model.nv);
     state.ResumeTiming();
 
-    se3::rnea(model, data, q, qdot, tau);
+    pinocchio::rnea(model, data, q, qdot, tau);
   }
 }
 
 static void BM_Pinocchio_ABA(benchmark::State& state)
 {
-  se3::Model model;
-  se3::urdf::buildModel(pinocchio_benchmarks::path +
+  pinocchio::Model model;
+  pinocchio::urdf::buildModel(pinocchio_benchmarks::path +
       pinocchio_benchmarks::models[(unsigned long)state.range(0)] + ".urdf",
-      se3::JointModelFreeFlyer(), model);
-  se3::Data data(model);
+      pinocchio::JointModelFreeFlyer(), model);
+  pinocchio::Data data(model);
 
   Eigen::VectorXd q = Eigen::VectorXd::Zero(model.nq);
   Eigen::VectorXd qdot = Eigen::VectorXd::Zero(model.nv);
@@ -58,7 +58,7 @@ static void BM_Pinocchio_ABA(benchmark::State& state)
     tau = Eigen::VectorXd::Random(model.nv);
     state.ResumeTiming();
 
-    se3::aba(model, data, q, qdot, tau);
+    pinocchio::aba(model, data, q, qdot, tau);
   }
 }
 
