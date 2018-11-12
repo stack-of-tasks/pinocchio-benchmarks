@@ -26,10 +26,10 @@ PKG_CONFIG_USE_DEPENDENCY(pinocchio-test pinocchio)
 INSTALL(TARGETS pinocchio-test RUNTIME DESTINATION bin)
 
 # KDL test
-ADD_EXECUTABLE(kdl-test kdl-test)
-PKG_CONFIG_USE_DEPENDENCY(kdl-test orocos-kdl)
-PKG_CONFIG_USE_DEPENDENCY(kdl-test kdl_parser)
-INSTALL(TARGETS kdl-test RUNTIME DESTINATION bin)
+#ADD_EXECUTABLE(kdl-test kdl-test)
+#PKG_CONFIG_USE_DEPENDENCY(kdl-test orocos-kdl)
+#PKG_CONFIG_USE_DEPENDENCY(kdl-test kdl_parser)
+#INSTALL(TARGETS kdl-test RUNTIME DESTINATION bin)
 
 # metapod
 #ADD_EXECUTABLE(metapod-test metapod-test)
@@ -70,10 +70,10 @@ PKG_CONFIG_USE_DEPENDENCY(benchmarks-pinocchio pinocchio)
 INSTALL(TARGETS benchmarks-pinocchio RUNTIME DESTINATION bin)
 
 # KDL
-ADD_EXECUTABLE(benchmarks-kdl benchmarks-kdl)
-PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl orocos-kdl)
-PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl kdl_parser)
-INSTALL(TARGETS benchmarks-kdl RUNTIME DESTINATION bin)
+#ADD_EXECUTABLE(benchmarks-kdl benchmarks-kdl)
+#PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl orocos-kdl)
+#PKG_CONFIG_USE_DEPENDENCY(benchmarks-kdl kdl_parser)
+#INSTALL(TARGETS benchmarks-kdl RUNTIME DESTINATION bin)
 
 # JuliaRobotics
 INSTALL(FILES benchmarks-julia.jl DESTINATION bin
