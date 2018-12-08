@@ -2,6 +2,7 @@
 
 using RigidBodyDynamics
 using StaticArrays
+using Random
 
 include("models.jl")
 

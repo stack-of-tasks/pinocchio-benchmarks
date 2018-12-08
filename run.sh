@@ -16,4 +16,5 @@ $PREFIX/bin/benchmarks-pinocchio
 $PREFIX/bin/benchmarks-rbdl
 #$PREFIX/bin/benchmarks-kdl
 #$PREFIX/bin/benchmarks-metapod
-#$PREFIX/bin/benchmarks-julia.jl
+#julia -O3 --check-bounds=no $PREFIX/bin/benchmarks-julia.jl
+
