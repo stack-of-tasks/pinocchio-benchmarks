@@ -41,21 +41,21 @@ popd
 #export CXX="ccache clang++-6.0"
 #export CC="ccache clang-6.0"
 
-mkdir -p build/kdl
-pushd build/kdl
-cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
-    -DENABLE_TESTS=ON -DCMAKE_CXX_STANDARD=98 \
-    ../../libs/kdl/orocos_kdl
-make -j8 install
-popd
+#mkdir -p build/kdl
+#pushd build/kdl
+#cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    #-DENABLE_TESTS=ON -DCMAKE_CXX_STANDARD=98 \
+    #../../libs/kdl/orocos_kdl
+#make -j8 install
+#popd
 
-mkdir -p build/kdl_parser
-pushd build/kdl_parser
-cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_PREFIX_PATH="$PREFIX;/opt/ros/kinetic" \
-    ../../libs/kdl_parser/kdl_parser
-make -j8 install
-popd
+#mkdir -p build/kdl_parser
+#pushd build/kdl_parser
+#cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=lib \
+    #-DCMAKE_PREFIX_PATH="$PREFIX;/opt/ros/kinetic" \
+    #../../libs/kdl_parser/kdl_parser
+#make -j8 install
+#popd
 
 if [[ ! -d libs/rbdl ]]
 then
