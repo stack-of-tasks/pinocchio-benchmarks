@@ -6,7 +6,7 @@ set -x
 [[ -d build || -d prefix ]] && rm -rf build prefix
 
 export PREFIX=${1:-$PWD/prefix}  # with bash / zsh
-export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig:/opt/ros/kinetic/lib/pkgconfig
+export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig:${PREFIX}/share/pkgconfig:/opt/ros/kinetic/lib/pkgconfig
 export LD_LIBRARY_PATH=${PREFIX}/lib:/opt/ros/kinetic/lib:${LD_LIBRARY_PATH}
 export CXX="ccache clang++-6.0"
 export CC="ccache clang-6.0"
